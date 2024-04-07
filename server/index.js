@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-import { checkIn, checkOut, createUser, verifyAdminLogin, bookRoom, scheduleService, bookTable,fetchRestaurantTables, fetchRooms, createEmployee, fetchScheduledServices, fetchUsers, fetchUsers } from './functions.js';
+import { checkIn, checkOut, createUser, verifyAdminLogin, bookRoom, scheduleService, bookTable,fetchRestaurantTables, fetchRooms, createEmployee, fetchScheduledServices, fetchUsers, verifyUserLogin } from './functions.js';
 
 dotenv.config();
 const app = express();
@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
   res.send('Root Route');
 });
 
-app.get('/admin/get-rooms',fetchRooms);
+app.get('/get-rooms',fetchRooms);
 app.get('/admin/get-restaurant-tables',fetchRestaurantTables);
 app.get('/admin/get-scheduled-services',fetchScheduledServices);
 app.get('/admin/get-users',fetchUsers);
@@ -34,6 +34,7 @@ app.put('/user/book-restaurant',bookTable);
 
 app.post('/admin/verify-admin-login',verifyAdminLogin);
 app.post('/admin/create-user',createUser);
+app.post('/user/login',verifyUserLogin);
 app.post('/admin/create-employee',createEmployee);
 
 app.listen(port, () => {

@@ -325,3 +325,17 @@ export async function fetchUsers(req, res){
         return res.status(500).json({"error" : `Internal server error ${error}`});
     }
 }
+
+export async function verifyUserLogin(req, res){
+   try {
+     const {email , password} = req.body;
+     if(!email || !password ) return res.status(400).json({"failure" : "either email or password is missing"});
+     const user  = await User.findOne({email});
+     if(!user) return res.status(404).json({"failure" : "No account, please get registered"});
+     if(user.password === password) return res.status(200).json({"success":"details verified successfully"});
+     if(user.password !== password) return res.status(404).json({"failure" : "wrong password"});
+   } catch (error) {
+        res.status(500).json({"error" : `Internal server error ${error}`});
+   }
+
+}
