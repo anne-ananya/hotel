@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/get-rooms',fetchRooms);
-app.get('/admin/get-restaurant-tables',fetchRestaurantTables);
+app.get('/get-restaurant-tables',fetchRestaurantTables);
 app.get('/admin/get-scheduled-services',fetchScheduledServices);
 app.get('/admin/get-users',fetchUsers);
 
