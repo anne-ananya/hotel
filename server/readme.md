@@ -1,7 +1,5 @@
 # Online Hotel Management System
 
-This Online Hotel Management System provides a comprehensive solution for managing hotel operations, including admin, scheduling, restaurant, and user modules. It's built using Next.js and MongoDB, offering RESTful API endpoints for various functionalities such as user management, room booking, check-in/check-out processes, and restaurant table booking.
-
 ## Getting Started
 
 ### Prerequisites
@@ -100,7 +98,7 @@ This Online Hotel Management System provides a comprehensive solution for managi
       "roomNumber": "101",
       "typeofSchedule": "cleaning",
       "scheduledTime": "2024-01-02T10:00:00Z",
-       "email" : "example@mail.com"
+      "email": "example@mail.com"
     }
     ```
 
@@ -116,3 +114,74 @@ This Online Hotel Management System provides a comprehensive solution for managi
       "bookedOn": "2024-01-01T19:00:00Z"
     }
     ```
+
+### Fetching Resources
+
+- **Fetch Rooms**
+  - **GET** `/admin/get-rooms`
+
+- **Fetch Restaurant Tables**
+  - **GET** `/admin/get-restaurant-tables`
+
+- **Fetch Scheduled Services**
+  - **GET** `/admin/get-scheduled-services`
+
+- **Fetch Employees**
+  - **GET** `/admin/get-employees`
+
+- **Fetch Users**
+  - **GET** `/admin/get-users`
+
+### Creating Employee
+
+- **Create Employee**
+  - **POST** `/admin/create-employee`
+  - Body:
+    ```json
+    {
+      "name": "Jane Doe",
+      "email": "jane.doe@example.com",
+      "mobileNumber": "1234567890",
+      "joinDate": "2024-01-01",
+      "salary": 50000
+    }
+    ```
+
+### Usage Examples
+
+- **Fetch Rooms Example**
+
+  Request: `GET /admin/get-rooms`
+
+  Response:
+  ```json
+  [
+    {
+      "roomNumber": 101,
+      "type": "Deluxe",
+      "amenities": ["WiFi", "TV", "Minibar"],
+      "availability": true
+    },
+    {
+      "roomNumber": 102,
+      "type": "Standard",
+      "amenities": ["WiFi", "TV"],
+      "availability": false
+    }
+  ]
+  ```
+
+- **Create Employee Example**
+
+  Request: `POST /admin/create-employee` with body:
+
+  ```json
+  {
+    "name": "Jane Doe",
+    "email": "jane.doe@example.com",
+    "mobileNumber": "1234567890",
+    "joinDate": "2024-01-01",
+    "salary": 50000
+  }
+  ```
+

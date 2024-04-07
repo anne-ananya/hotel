@@ -3,6 +3,7 @@ import {User} from './models/User.js';
 import {RoomModel} from './models/Room.js';
 import {Scheduler} from './models/Scheduler.js';
 import { RestaurantModel } from './models/Restaurant.js';
+import Employee from './models/Employee.js';
 
 export async function verifyAdminLogin(req, res){
     try {
@@ -254,6 +255,72 @@ export async function bookTable(req, res){
         await restaurantDetails.save();
         await user.save();
         return res.status(200).json({"success" : "successfully booked"});
+    } catch (error) {
+        return res.status(500).json({"error" : `Internal server error ${error}`});
+    }
+}
+
+export async function fetchRestaurantTables(req, res){
+    try {
+        const tables = await RestaurantModel.find();
+        return res.status(200).json(tables);
+    } catch (error) {
+        return res.status(500).json({"error" : `Internal server error ${error}`});
+    }
+}
+
+export async function fetchRooms(req, res){
+    try {
+        const rooms = await RoomModel.find();
+        return res.status(200).json(rooms);
+    } catch (error) {
+        return res.status(500).json({"error" : `Internal server error ${error}`});
+    }
+}
+
+export async function fetchScheduledServices(req, res){
+    try {
+        const services = await Scheduler.find();
+        return res.status(200).json(services);
+    } catch (error) {
+        return res.status(500).json({"error" : `Internal server error ${error}`});
+    }
+}
+
+export async function createEmployee(req, res){
+    try {
+        const {name, email, mobileNumber, joinDate, salary} = req.body;
+        if(!name || !email || !mobileNumber || !joinDate || !salary){
+            return res.status(400).json({"failure" : "some parameters are missing"});
+        }
+        if(!email.includes('@') || !email.includes('.') || email.indexOf('@') > email.indexOf('.')){
+            return res.status(400).json({"failure" :'Not a valid email'});
+        }
+        let newEmployee = new Employee({name,email,mobileNumber,joinDate,salary});
+        const createStatus = await newEmployee.save();
+        if(createStatus._id){
+            return res.status(200).json({"success" : "employee created"});
+        }
+        else return res.status(500).json({"failure" : "unable to create employee"})
+        
+    } catch (error) {
+        return res.status(500).json({"error" : `Internal server error ${error}`});
+    }
+}
+
+export async function fetchEmployees(req, res){
+    try {
+        const employees = await Employee.find();
+        return res.status(200).json(employees);
+    } catch (error) {
+        return res.status(500).json({"error" : `Internal server error ${error}`});
+    }
+}
+
+export async function fetchUsers(req, res){
+    try {
+        const users = await User.find();
+        return res.status(200).json(users);
     } catch (error) {
         return res.status(500).json({"error" : `Internal server error ${error}`});
     }
