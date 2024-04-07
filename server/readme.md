@@ -99,7 +99,8 @@ This Online Hotel Management System provides a comprehensive solution for managi
     {
       "roomNumber": "101",
       "typeofSchedule": "cleaning",
-      "scheduledTime": "2024-01-02T10:00:00Z"
+      "scheduledTime": "2024-01-02T10:00:00Z",
+       "email" : "example@mail.com"
     }
     ```
 
