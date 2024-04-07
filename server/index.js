@@ -8,7 +8,7 @@ dotenv.config();
 const app = express();
 app.use(express.json())
 app.use(cors())
-const port = 8080;
+
 
 mongoose.connect(process.env.CONNECTION_URI,{
 }).then(()=>{
@@ -37,6 +37,7 @@ app.post('/admin/create-user',createUser);
 app.post('/user/login',verifyUserLogin);
 app.post('/admin/create-employee',createEmployee);
 
+const port = process.env.PORT;
 app.listen(port, () => {
   console.log(`Server listening at ${port}`);
 });
