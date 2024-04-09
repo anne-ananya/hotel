@@ -24,3 +24,6 @@ https://hotel-frontend-nbot.onrender.com
 ## `backend url`
 
 https://hotelease.onrender.com
+
+### SRS Link
+https://docs.google.com/document/d/1ShK201mqHVjjltUHdmOL1WN-B__04k2a0N8LlUpVwOA/edit?usp=sharing
